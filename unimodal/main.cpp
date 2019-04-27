@@ -53,6 +53,6 @@ int main()
         std::cout << ex.what() << std::endl;
     }
 
-    std::getchar();
+    system("pause");
     return 0;
 }
