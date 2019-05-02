@@ -19,7 +19,7 @@ double unimodal::FindMin(const std::string& function, const std::string& args,
         throw std::runtime_error("Invalid function input.");
     }
 
-    if (start >= end || std::abs(end - start) < epsilon)
+    if (start >= end || epsilon <= 0)
     {
         throw std::runtime_error("Invalid bounds.");
     }
