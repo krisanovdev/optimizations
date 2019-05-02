@@ -28,7 +28,7 @@ double unimodal::FindMin(const std::string& function, const std::string& args,
     while (std::abs(end - start) > epsilon)
     {
         const double x = (end + start) / 2;
-        const double values[] = { x - epsilon, x + epsilon };
+        const double values[] = { x - epsilon / 2, x + epsilon / 2 };
         if (parser.Eval(values) < parser.Eval(values + 1))
         {
             end = x;
