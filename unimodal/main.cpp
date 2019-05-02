@@ -34,7 +34,7 @@ int main()
 
         if(std::cin.fail())
         {
-            std::cout << "Unsuported syntax." << std::endl;
+            throw std::runtime_error("Unsuported syntax.");
         }
 
         std::cout << "left bound: ";
