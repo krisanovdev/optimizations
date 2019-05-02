@@ -34,11 +34,18 @@ def find_argmin_h_expr(h_expr):
     return solution
 
 
-def calculate_norm(vector):
-    norm = 0
-    for elem in vector:
-        norm += elem * elem
-    return sqrt(norm)
+def delta(first, second):
+    result = []
+    for i in range(len(first)):
+        result.append(first[i] - second[i])
+    return result
+
+
+def norm(vector):
+    result = 0.0
+    for item in vector:
+        result += item**2
+    return sqrt(result)
 
 
 def main():
@@ -55,19 +62,23 @@ def main():
     iteration = 0
     while 1:
         gradient = get_gradient(func, symbols, current_x)
-        norm = calculate_norm(gradient)
-        if norm <= epsilon:
-            break
-
         h_expr = create_h_expr(func, symbols, current_x, gradient)
         h = find_argmin_h_expr(h_expr)
 
+        prev_x = current_x.copy()
         for i in range(len(current_x)):
             current_x[i] = current_x[i] - h * gradient[i]
         print('Iteration №{}: x = {}'.format(iteration, current_x))
+
+        norm_delta_last_two = norm(delta(prev_x, current_x))
+        if norm_delta_last_two < epsilon:
+            break
+
         iteration += 1
 
-    print('Gradient norm: {}'.format(norm))
+    print("Solution: {}".format(current_x))
+    print("Norm of delta of two last x: {}".format(norm_delta_last_two))
+    print('Gradient norm: {}'.format(norm(gradient)))
 
 
 if __name__ == '__main__':
