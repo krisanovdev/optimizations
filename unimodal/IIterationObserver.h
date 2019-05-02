@@ -4,7 +4,7 @@ namespace unimodal
     {
     public:
         virtual ~IIterationObserver(){}
-        virtual void OnNewIteration(unsigned iterationNumber, double newValue) = 0;
+        virtual void OnNewIteration(unsigned iterationNumber, double newA, double newB) = 0;
     };
 }
 

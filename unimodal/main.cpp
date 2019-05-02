@@ -18,9 +18,9 @@ T SafeGet()
 class ConsoleIterationObserver : public unimodal::IIterationObserver
 {
 public:
-    virtual void OnNewIteration(unsigned iterationNumber, double newValue)
+    virtual void OnNewIteration(unsigned iterationNumber, double newA, double newB) override
     {
-        std::cout << "Iteration " << iterationNumber << ": x = " << newValue << std::endl;
+        std::cout << "Iteration " << iterationNumber << ": a=" << newA << " b=" << newB << std::endl;
     }
 };
 
@@ -46,7 +46,7 @@ int main()
 
         ConsoleIterationObserver observer;
         const double res = unimodal::FindMin(function, "x", leftBound, rightBound, epsilon, &observer);
-        std::cout << res << std::endl;
+        std::cout << "x=" << res << std::endl;
     }
     catch(const std::exception& ex)
     {

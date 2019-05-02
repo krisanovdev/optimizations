@@ -24,16 +24,10 @@ double unimodal::FindMin(const std::string& function, const std::string& args,
         throw std::runtime_error("Invalid bounds.");
     }
 
-    double x = (end + start) / 2;
     unsigned it = 0;
     while (std::abs(end - start) > epsilon)
     {
-        x = (end + start) / 2;
-        if (observer != nullptr)
-        {
-            observer->OnNewIteration(++it, x);
-        }
-
+        const double x = (end + start) / 2;
         const double values[] = { x - epsilon, x + epsilon };
         if (parser.Eval(values) < parser.Eval(values + 1))
         {
@@ -43,7 +37,12 @@ double unimodal::FindMin(const std::string& function, const std::string& args,
         {
             start = x;
         }
+
+        if (observer != nullptr)
+        {
+            observer->OnNewIteration(++it, start, end);
+        }
     }
 
-    return x;
+    return (start + end) / 2;
 }
